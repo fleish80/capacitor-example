@@ -1,13 +1,32 @@
-import { enableProdMode } from '@angular/core';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import {enableProdMode} from '@angular/core';
+import {environment} from './environments/environment';
+import {bootstrapApplication} from '@angular/platform-browser';
+import {AppComponent} from './app.component';
+import {PreloadAllModules, provideRouter, Route, withDebugTracing, withPreloading} from '@angular/router';
 
-import { AppModule } from './app/app.module';
-import { environment } from './environments/environment';
+export const ROUTES: Route[] = [
+  {path: '', pathMatch: 'full', redirectTo: '', title: 'capacitor example'},
+  {
+    path: 'camera',
+    loadComponent: () => import('./camera.component').then((c) => c.CameraComponent),
+    title: 'capacitor camera example'
+  },
+  {
+    path: 'geolocation',
+    loadComponent: () => import('./geolocation.component').then((c) => c.GeolocationComponent),
+    title: 'capacitor geolocation example'
+  }
+]
 
 if (environment.production) {
   enableProdMode();
 }
 
-platformBrowserDynamic()
-  .bootstrapModule(AppModule)
-  .catch((err) => console.error(err));
+
+bootstrapApplication(AppComponent,
+  {
+    providers: provideRouter(ROUTES,
+      withPreloading(PreloadAllModules),
+      withDebugTracing()
+    )
+  });
