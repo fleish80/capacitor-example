@@ -12,6 +12,7 @@ import {CommonModule, NgOptimizedImage} from '@angular/common';
     <nav class="nav">
       <a routerLink="/camera">Camera</a>
       <a routerLink="/geolocation">Geolocation</a>
+      <a routerLink="/barcode-scanner">Barcode Scanner Community</a>
     </nav>
     <router-outlet></router-outlet>
   `,

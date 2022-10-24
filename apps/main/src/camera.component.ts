@@ -9,6 +9,7 @@ import {NgIf} from '@angular/common';
     NgIf
   ],
   template: `
+
     <div class="card-container">
       <button class="card card-small" (click)="captureImage()">
         <span>Capture image</span>

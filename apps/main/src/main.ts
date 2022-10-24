@@ -15,7 +15,12 @@ export const ROUTES: Route[] = [
     path: 'geolocation',
     loadComponent: () => import('./geolocation.component').then((c) => c.GeolocationComponent),
     title: 'capacitor geolocation example'
-  }
+  },
+  {
+    path: 'barcode-scanner',
+    loadComponent: () => import('./barcode-scanner.component').then((c) => c.BarcodeScannerComponent),
+    title: 'capacitor barcode scanner example'
+  },
 ]
 
 if (environment.production) {
