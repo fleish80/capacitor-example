@@ -1,8 +1,9 @@
-import {enableProdMode} from '@angular/core';
+import {enableProdMode, importProvidersFrom} from '@angular/core';
 import {environment} from './environments/environment';
+import {PreloadAllModules, provideRouter, Route, withDebugTracing, withPreloading} from '@angular/router';
 import {bootstrapApplication} from '@angular/platform-browser';
 import {AppComponent} from './app.component';
-import {PreloadAllModules, provideRouter, Route, withDebugTracing, withPreloading} from '@angular/router';
+import {ServiceWorkerModule} from '@angular/service-worker';
 
 export const ROUTES: Route[] = [
   {path: '', pathMatch: 'full', redirectTo: '', title: 'capacitor example'},
@@ -30,8 +31,17 @@ if (environment.production) {
 
 bootstrapApplication(AppComponent,
   {
-    providers: provideRouter(ROUTES,
+    providers: [provideRouter(ROUTES,
       withPreloading(PreloadAllModules),
       withDebugTracing()
-    )
-  });
+    ),
+      importProvidersFrom(ServiceWorkerModule.register('ngsw-worker.js', {
+        enabled: environment.production,
+        // Register the ServiceWorker as soon as the application is stable
+        // or after 30 seconds (whichever comes first).
+        registrationStrategy: 'registerWhenStable:30000'
+      }))
+    ]
+  },
+);
+

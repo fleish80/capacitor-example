@@ -34,12 +34,14 @@ import {CommonModule, NgOptimizedImage} from '@angular/common';
       }
     `
   ],
+
   imports: [
     CommonModule,
     RouterOutlet,
     RouterLinkWithHref,
     NgOptimizedImage
   ],
+
   standalone: true
 })
 export class AppComponent {
