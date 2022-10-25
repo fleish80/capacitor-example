@@ -4,6 +4,7 @@ import {PreloadAllModules, provideRouter, Route, withDebugTracing, withPreloadin
 import {bootstrapApplication} from '@angular/platform-browser';
 import {AppComponent} from './app.component';
 import {ServiceWorkerModule} from '@angular/service-worker';
+import {defineCustomElements} from '@ionic/pwa-elements/loader';
 
 export const ROUTES: Route[] = [
   {path: '', pathMatch: 'full', redirectTo: '', title: 'capacitor example'},
@@ -44,4 +45,6 @@ bootstrapApplication(AppComponent,
     ]
   },
 );
+
+defineCustomElements(window);
 

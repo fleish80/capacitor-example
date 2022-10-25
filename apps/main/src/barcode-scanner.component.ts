@@ -8,7 +8,6 @@ import {BarcodeService} from 'libs/barcode-scanner/src/lib/barcode.service';
   standalone: true,
   imports: [CommonModule],
   template: `
-    bye
     <button (click)="startScan()">Start Scan</button>
     {{result}}
   `,
@@ -32,21 +31,7 @@ export class BarcodeScannerComponent implements OnInit, OnDestroy {
   }
 
   async startScan() {
-
-    // // BarcodeScanner.hideBackground();
-    // // make background of WebView transparent
-    // // note: if you are using ionic this might not be enough, check below
-    // // await BarcodeScanner.hideBackground();
-    //
-    // const result = await BarcodeScanner.startScan(); // start scanning and wait for a result
-    //
-    // // if the result has content
-    // if (result.hasContent) {
-    //   this.result = result.content; // log the raw scanned content
-    // }
-
     this.result = await this.barcodeService.startScan();
-
   }
 
 }
